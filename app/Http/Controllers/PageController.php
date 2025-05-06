@@ -169,20 +169,20 @@ class PageController extends Controller
         'stok' => '56',
         'harga' => '158000',
     ],
-];
+    ];
 
-public function addCollectionForm(Request $request)
-{
+    public function addCollectionForm(Request $request)
+    {
     $username = $request->query('username');
     if (!$username) {
         return redirect()->route('login')->withErrors(['Silakan login terlebih dahulu.']);
     }
 
     return view('pengelolaan', compact('username'));
-}
+    }
 
-public function storeCollection(Request $request)
-{
+    public function storeCollection(Request $request)
+    {
     $request->validate([
         'gambar' => 'required|url',
         'judul' => 'required|string',
@@ -202,14 +202,13 @@ public function storeCollection(Request $request)
         'stok' => $request->input('stok'),
         'harga' => $request->input('harga'),
     ];
-
     self::$collectionItems[] = $newItem;
     $username = $request->input('username');
     return view('product', [
         'username' => $username,
         'collectionItems' => self::$collectionItems,
     ]);
-}
+    }
 
     public function profile(Request $request)
     {
